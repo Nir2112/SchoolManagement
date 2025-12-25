@@ -1,19 +1,33 @@
-import { useState,useEffect,useRef, use } from "react" 
+import { useState,useEffect,useRef, useContext } from "react" 
+import { useNavigate } from "react-router-dom"
 import axios from "axios"
+import { logUserContext, serverContext } from "../App.jsx"
 
 const Login =() =>{
+
+    const navigate = useNavigate();
+
+
     const [id,setId] = useState("")
     const [pass,setPass] = useState("")
 
+    const {server} = useContext(serverContext)
+    const {login} = useContext(logUserContext)
+    useEffect(()=>console.log(id,pass),[id,pass])
+
     const checkLogin=()=>{
-        axios.get(`http://10.100.11.15:3000/login`,{
+        server.get(`/login`,{
             params:{
                 id: id,
                 pass: pass
-            }
+            }          
         })
         .then((res)=>{
-            alert("seccessful Login");         
+            console.log(res);
+            
+            alert("seccessful Login"); 
+            login(id)
+            navigate('/welcom/')        
         })
         .catch((err)=>{
             console.log(err);
@@ -32,7 +46,7 @@ const Login =() =>{
         </div>
         <div>
             <button onClick={checkLogin}>Login</button>
-            <button>Register</button>
+            <button onClick={()=>navigate('/register/')}>Register</button>
         </div>
     </div>)
 } 

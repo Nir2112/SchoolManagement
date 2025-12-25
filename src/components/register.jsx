@@ -1,7 +1,11 @@
 import { useState } from "react"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 const Register =() =>{
+
+    const navigate = useNavigate();
+
     const [student, setStudent] = useState([])
     
     const addField=(field,value)=>{
@@ -15,11 +19,17 @@ const Register =() =>{
         axios.post(`http://10.100.11.15:3000/register`,student)
         .then((res)=>{
             alert("seccessful Register");  
+            navigate('/')
         })
         .catch((err)=>{
             console.log(err);  
             alert("error")       
         })
+    }
+
+    const HandleLogin = ()=>{   
+
+
     }
 
     return(<div>
@@ -34,8 +44,9 @@ const Register =() =>{
             <input type="text" placeholder="study" onChange={(e) => addField("study",e.target.value)}/>
         </div>
          <div>
-            <button>Login</button>
-            <button onClick={addStudent}>Register</button>
+            <h3></h3>
+            <button onClick={()=> navigate('/') }>Login</button>
+            <button onClick={addStudent }>Register</button>
         </div>
     </div>)
 } 
