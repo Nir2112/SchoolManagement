@@ -8,8 +8,8 @@ const Welcome =() =>{
                 <Link to={'/profile'}replace >
                         <h2>Profile</h2>
                 </Link>
-                <Link to={'/course'}replace >
-                        <h2>Course</h2>
+                <Link to={'/studing'}replace >
+                        <h2>Studing</h2>
                 </Link>
             </div>
         <div>

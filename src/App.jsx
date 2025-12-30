@@ -2,7 +2,7 @@ import Profile from './components/profile.jsx'
 import Welcome from './components/welcome.jsx'
 import Register from './components/register.jsx'
 import Login from './components/Login.jsx'
-import Course from './components/course.jsx'
+import Studing from './components/Studing.jsx'
 import './App.css'
 import { Routes , Route ,Link, useNavigate} from 'react-router-dom'
 import { createContext, useState } from 'react'
@@ -14,7 +14,7 @@ export const logUserContext = createContext()
 function App() {
   const server =axios.create({baseURL:"http://10.100.11.15:3000"}) 
   const navigate = useNavigate()
-  const [logUser, setlogUser] = useState({
+  const [logUser, setlogUser,setCourses] = useState({
     user:{},  
     status:false
   })
@@ -35,6 +35,7 @@ function App() {
     })
     navigate('/',{replace:true})
   }
+
   return (
     <>
     <div style={{position:'fixed',top:200,display:'flex',flexDirection:'row',gap:'10px'}}> 
@@ -50,8 +51,8 @@ function App() {
       <Link to={'/profile'}replace >
             <h2>Profile</h2>
       </Link>
-      <Link to={'/course'}replace >
-            <h2>Course</h2>
+      <Link to={'/studing'}replace >
+            <h2>Studing</h2>
       </Link>
     </div>
 
@@ -62,7 +63,7 @@ function App() {
           <Route path='/register' element={<Register/>}/>
           <Route path='/welcom' element={<Welcome/>}/>
           <Route path='/profile' element={<Profile/>}/>
-          <Route path='/course' element={<Course/>}/>
+          <Route path='/studing' element={<Studing/>}/>
         </Routes>
       </logUserContext.Provider>
     </serverContext.Provider>
