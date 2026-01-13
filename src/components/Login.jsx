@@ -3,6 +3,11 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import { logUserContext, serverContext } from "../App.jsx"
 
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import Input from '@mui/joy/Input';
+import LoginIcon from '@mui/icons-material/Login';
+
 const Login =() =>{
 
     const navigate = useNavigate();
@@ -36,19 +41,33 @@ const Login =() =>{
             
         })
     }
-
-
     return(<div>
-        <h1>Login page</h1>
-        <div>
-            <input type="text" placeholder="id" onChange={(e) => setId(e.target.value)}/>
-            <input type="text" placeholder="password" onChange={(e) => setPass(e.target.value)}/>
+        <h1 > {<LoginIcon/>}Login page </h1>
+        <div style={{display:'flex',flexDirection:'column'}}>
+            <Stack spacing={0.9}>
+                <Input
+                    type="text"
+                    placeholder="id"
+                    onChange={(e) => setId(e.target.value)}
+                />
+                <Input
+                    type="password"
+                    placeholder="password"
+                    onChange={(e) => setPass(e.target.value)}                 
+                />
+            </Stack>       
+
         </div>
-        <div>
-            <button onClick={checkLogin}>Login</button>
-            <button onClick={()=>navigate('/register/')}>Register</button>
+        <div style={{ display: 'flex', justifyContent: 'center', margin: '10%' }}>
+            <Stack direction="row" spacing={2}>
+                <Button variant="contained"  onClick={checkLogin} >
+                    Login
+                </Button>
+                <Button variant="outlined" onClick={()=>navigate('/register/')}>
+                    register
+                </Button>
+            </Stack>
         </div>
     </div>)
 } 
-
 export default Login
