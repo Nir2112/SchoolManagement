@@ -5,16 +5,22 @@ import { useNavigate } from "react-router-dom"
 import Input from '@mui/joy/Input';
 import Typography from '@mui/joy/Typography';
 
+import Box from '@mui/joy/Box';
+import Button from '@mui/joy/Button';
+import Stack from '@mui/joy/Stack';
 
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+import IconButton from '@mui/joy/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
 const passwordRules = {
   lower: /[a-z]/,
   upper: /[A-Z]/,
   number: /[0-9]/,
   special: /[^A-Za-z0-9]/,
-  length: /.{12,}/, // your minLength
+  length: /.{12,}/, // minLength
 };
 
 const getPasswordStrength = (password) => {
@@ -35,6 +41,7 @@ const Register =() =>{
         password:""
     }) 
 
+    const [showPassword, setShowPassword] = useState(false);
     const password = student.password || "";
     const strength = getPasswordStrength(password);
     const hue = Math.min(strength * 1.2, 120);
@@ -62,73 +69,118 @@ const Register =() =>{
     //     console.log(student)
     // },[student])
     return(<div>
-        <h1>Register page</h1>
-        <div style={{display:'flex',flexDirection:'column'}}>
+         <Box component="section" sx={{ p: 2, border: '1px solid grey',borderRadius:'10px', width:'450px' }}>
+        
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+            <PersonAddIcon sx={{ fontSize: 80 }} />  
+            <Typography level="h2" component="h1" color='white' sx={{ mt: 0, fontWeight: 'xl' }}>
+                Collage Register
+            </Typography>
+        </div>
+        <div style={{display:'flex',flexDirection:'column', margin: '20px'}}>
             <Stack spacing={0.9} sx={{ '--hue': hue }}>
                 <Input
                     type="text"
                     placeholder="id"
                     value={student.id}
                     onChange={(e) => addField("id",e.target.value)}
-                />
+                    />
                 <Input
                     type="text"
                     placeholder="name"
                     value={student.name}
                     onChange={(e) => addField("name",e.target.value)}
-                />
+                    />
                 <Input
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     placeholder="password"
                     value={student.password}
-                    onChange={(e) => addField("password",e.target.value)}
-                    
-                />
-                <Typography
-                    level="body-xs"
-                    sx={{ alignSelf: 'flex-end', color: `hsl(${hue} 80% 30%)` }}
-                    >
-                    {strength < 40 && 'Very weak'}
-                    {strength >= 40 && strength < 60 && 'Weak'}
-                    {strength >= 60 && strength < 80 && 'Strong'}
-                    {strength >= 80 && 'Very strong'}
-                </Typography>
+                    onChange={(e) => addField("password",e.target.value)}          
+                    endDecorator={
+                        <div style={{ display: 'flex',flexDirection:'row', alignItems: 'center', gap: '10px' }}>   
+                            <Typography
+                            level="body-xs"
+                            sx={{  color: `hsl(${hue} 80% 30%)`,whiteSpace: 'nowrap',fontSize: '12px' }}>
+                                {strength < 40 && 'Very weak'}
+                                {strength >= 40 && strength < 60 && 'Weak'}
+                                {strength >= 60 && strength < 80 && 'Strong'}
+                                {strength >= 80 && 'Very strong'}
+                            </Typography>
+                            <IconButton
+                                onClick={() => setShowPassword(!showPassword)} // שינוי המצב בלחיצה
+                                variant="plain"
+                                color="neutral"
+                                size="sm"
+                            >
+                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                        </div>
+                    }/>
+                
                  <Input
                     type="text"
                     placeholder="email"
                     value={student.email}
                     onChange={(e) => addField("email",e.target.value)}
-                />
+                    />
                  <Input
                     type="text"
                     placeholder="phone"
                     value={student.phone}
                     onChange={(e) => addField("phone",e.target.value)}
-                />
+                    />
                  <Input
                     type="text"
                     placeholder="birthday"
                     value={student.birthday}
                     onChange={(e) => addField("birthday",e.target.value)}
-                />
+                    />
                  <Input
                     type="text"
                     placeholder="study"
                     value={student.study}
                     onChange={(e) => addField("study",e.target.value)}
-                />
+                    />
             </Stack>       
         </div>
-        <div style={{ display: 'flex', justifyContent: 'center' , margin: '10%' }}>
-            <Stack direction="row" spacing={2}>
-                <Button variant="contained"  onClick={()=> navigate('/') } >
-                    Login
-                </Button>
+        <div style={{ display: 'flex', justifyContent: 'center'  }}>
+            <Stack direction="column" spacing={2}>
                 <Button variant="outlined" onClick={addStudent }>
                     register
                 </Button>
+                <Button variant="solid"  onClick={()=> navigate('/') } >
+                    Login
+                </Button>
             </Stack>
         </div>
+        </Box>
     </div>)
 } 
 export default Register
+
+
+
+
+
+
+
+{/* <div style={{display:'flex',flexDirection:'column', margin: '20px'}}>
+            <Stack spacing={0.9} sx={{ '--hue': hue }}></Stack>
+                    <Input
+                        type="password"
+                        placeholder="password"
+                        value={student.password}
+                        onChange={(e) => addField("password",e.target.value)}
+                        
+                        />
+                    <Typography
+                        level="body-xs"
+                        sx={{ alignSelf: 'flex-end', color: `hsl(${hue} 80% 30%)` }}
+                        >
+                        {strength < 40 && 'Very weak'}
+                        {strength >= 40 && strength < 60 && 'Weak'}
+                        {strength >= 60 && strength < 80 && 'Strong'}
+                        {strength >= 80 && 'Very strong'}
+                    </Typography>
+                    </Stack>
+        </div> */}

@@ -3,18 +3,26 @@ import Welcome from './components/welcome.jsx'
 import Register from './components/register.jsx'
 import Login from './components/Login.jsx'
 import Studing from './components/Studing.jsx'
+
+import ModeToggle from './components/darkLight.jsx'
+
 import './App.css'
 import { Routes , Route ,Link, useNavigate} from 'react-router-dom'
 import { createContext, useState } from 'react'
 import axios from 'axios'
 
+import Sheet from '@mui/joy/Sheet';
+
 export const serverContext = createContext()
 export const logUserContext = createContext()
 
+//10.100.11.15
+const domain = "localhost"
+
 function App() {
-  const server =axios.create({baseURL:"http://10.100.11.15:3000"}) 
+  const server =axios.create({baseURL:`http://${domain}:3000`}) 
   const navigate = useNavigate()
-  const [logUser, setlogUser,setCourses] = useState({
+  const [logUser, setlogUser] = useState({
     user:{},  
     status:false
   })
@@ -28,7 +36,7 @@ function App() {
       console.log(err)
     })
   }
-   const logout = ()=>{
+  const logout = ()=>{
     setlogUser({
       user:{},
       status:false
@@ -38,26 +46,42 @@ function App() {
 
   return (
     <>
-    <div style={{position:'fixed',top:200,display:'flex',flexDirection:'row',gap:'10px'}}> 
-      <Link to={'/'} replace>
-        <h2>Login</h2>
-      </Link>
-        <Link to={'/register'}replace >
-            <h2>Register</h2>
-      </Link>
-      <Link to={'/welcom'}replace >
-            <h2>Welcom</h2>
-      </Link>
-      <Link to={'/profile'}replace >
-            <h2>Profile</h2>
-      </Link>
-      <Link to={'/studing'}replace >
-            <h2>Studing</h2>
-      </Link>
-    </div>
-
+  
     <serverContext.Provider value={{server}}>
       <logUserContext.Provider  value={{logUser,login,logout}}>
+        
+
+          <Sheet
+          sx={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            p: 0,
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '10px',
+            alignItems: 'center',
+            boxShadow: 'sm',
+            zIndex: 100,
+            bgcolor: 'background.surface' // מוודא שיש צבע רקע
+          }}
+          >
+          {logUser.status &&
+          <>
+          {/* <Link to={'/'} ><h2>Login</h2></Link>
+          <Link to={'/register'} ><h2>Register</h2></Link> */}
+          <Link to={'/welcom'} ><h2>Welcome</h2></Link>
+          <Link to={'/profile'} ><h2>Profile</h2></Link>
+          <Link to={'/studing'} ><h2>Studing</h2></Link>
+          </>
+          }
+
+          <div style={{ marginLeft: 'auto' }}>
+            <ModeToggle />
+          </div>
+        </Sheet>
+        
         <Routes>
           <Route path='/' element={<Login/>}/> 
           <Route path='/register' element={<Register/>}/>

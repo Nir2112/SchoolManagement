@@ -1,5 +1,7 @@
 import { useContext } from "react"
 import { logUserContext } from "../App"
+import LogoutIcon from '@mui/icons-material/Logout';
+import IconButton from '@mui/joy/IconButton';
 
 const Profile =() =>{
     const {logUser, logout}= useContext(logUserContext) 
@@ -11,10 +13,16 @@ const Profile =() =>{
             <h2>ID: {id}</h2>
             <h2>Email: {email}</h2>
             <h2>Phone: {phone}</h2>
-            <h2>Birth day {birthday}:</h2>
+            <h2>Birth day: {birthday}</h2>
             <h2>Studing: {study}</h2>
         </div>
-        <button onClick={logout}>logout</button>
+        <IconButton
+            variant="plain"
+            color="neutral"
+            size="lg"
+            onClick={logout}>
+                <LogoutIcon /> Logout
+        </IconButton>
         
         {/*?? לבדוק לגבי זה גם בregister + server
          <div>
