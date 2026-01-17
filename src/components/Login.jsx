@@ -20,7 +20,6 @@ const Login =() =>{
 
     const [showPassword, setShowPassword] = useState(false);
 
-
     const [id,setId] = useState("")
     const [pass,setPass] = useState("")
 
@@ -29,7 +28,7 @@ const Login =() =>{
     //useEffect(()=>console.log(id,pass),[id,pass])
     useEffect(() => {
         if (logUser.status) {
-            navigate('/welcom'); // או לכל דף ראשי אחר
+            navigate('/welcom');
         }
     }, [logUser.status]);
 
@@ -55,10 +54,6 @@ const Login =() =>{
         })
     }
     return(<div>
-        {/* <div style={{display:'flex',flexDirection:'column', alignItems: 'center', justifyContent: 'center'}}>
-        {<LoginIcon sx={{ fontSize: 80 }}/>}    
-        <h1 style={{ margin: 0 }}>Collage Login</h1>
-        </div> */}
         <Box component="section" sx={{ p: 2, border: '1px solid grey',borderRadius:'10px', width:'450px' }}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             <LoginIcon sx={{ fontSize: 80 }} />  

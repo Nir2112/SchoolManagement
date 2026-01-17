@@ -7,14 +7,13 @@ const Profile =() =>{
     const {logUser, logout}= useContext(logUserContext) 
     const {name,id,email,phone,birthday,study} = logUser.user   
     return(<div>
-        <h1>Profile page</h1>
         <div>
-            <h2>Name: {name}</h2>
-            <h2>ID: {id}</h2>
-            <h2>Email: {email}</h2>
-            <h2>Phone: {phone}</h2>
-            <h2>Birth day: {birthday}</h2>
-            <h2>Studing: {study}</h2>
+            <h3>Name: {name}</h3>
+            <h3>ID: {id}</h3>
+            <h3>Email: {email}</h3>
+            <h3>Phone: {phone}</h3>
+            <h3>Birth day: {birthday}</h3>
+            <h3>Studies: {study}</h3>
         </div>
         <IconButton
             variant="plain"
@@ -23,11 +22,6 @@ const Profile =() =>{
             onClick={logout}>
                 <LogoutIcon /> Logout
         </IconButton>
-        
-        {/*?? לבדוק לגבי זה גם בregister + server
-         <div>
-            <img src="" alt="" />
-        </div> */}
     </div>)
 } 
 

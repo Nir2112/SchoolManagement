@@ -25,13 +25,11 @@ const passwordRules = {
 
 const getPasswordStrength = (password) => {
   let score = 0;
-
   if (passwordRules.lower.test(password)) score += 20;
   if (passwordRules.upper.test(password)) score += 20;
   if (passwordRules.number.test(password)) score += 20;
   if (passwordRules.special.test(password)) score += 20;
   if (passwordRules.length.test(password)) score += 20;
-
   return score;
 };
 
@@ -45,7 +43,6 @@ const Register =() =>{
     const password = student.password || "";
     const strength = getPasswordStrength(password);
     const hue = Math.min(strength * 1.2, 120);
-
 
     const addField=(field,value)=>{
         setStudent({
@@ -107,7 +104,7 @@ const Register =() =>{
                                 {strength >= 80 && 'Very strong'}
                             </Typography>
                             <IconButton
-                                onClick={() => setShowPassword(!showPassword)} // שינוי המצב בלחיצה
+                                onClick={() => setShowPassword(!showPassword)}
                                 variant="plain"
                                 color="neutral"
                                 size="sm"
@@ -157,30 +154,3 @@ const Register =() =>{
     </div>)
 } 
 export default Register
-
-
-
-
-
-
-
-{/* <div style={{display:'flex',flexDirection:'column', margin: '20px'}}>
-            <Stack spacing={0.9} sx={{ '--hue': hue }}></Stack>
-                    <Input
-                        type="password"
-                        placeholder="password"
-                        value={student.password}
-                        onChange={(e) => addField("password",e.target.value)}
-                        
-                        />
-                    <Typography
-                        level="body-xs"
-                        sx={{ alignSelf: 'flex-end', color: `hsl(${hue} 80% 30%)` }}
-                        >
-                        {strength < 40 && 'Very weak'}
-                        {strength >= 40 && strength < 60 && 'Weak'}
-                        {strength >= 60 && strength < 80 && 'Strong'}
-                        {strength >= 80 && 'Very strong'}
-                    </Typography>
-                    </Stack>
-        </div> */}

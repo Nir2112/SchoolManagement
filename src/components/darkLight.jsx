@@ -9,7 +9,6 @@ const ModeToggle = () => {
   const { mode, setMode } = useColorScheme();
   const [mounted, setMounted] = React.useState(false);
 
-  // חובה: חיכיון שהדף ייטען כדי למנוע באגים של שרת-לקוח
   React.useEffect(() => {
     setMounted(true);
   }, []);

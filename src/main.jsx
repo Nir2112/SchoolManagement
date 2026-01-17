@@ -11,32 +11,38 @@ const customTheme = extendTheme({
     dark: {
       palette: {
         background: {
-          // body = הרקע הכללי של האתר
-          body: '#1a1a2e', // דוגמה: כחול-לילה כהה (במקום שחור)
-          
-          // surface = הרקע של התפריט, כרטיסיות, ומודלים
-          surface: '#16213e', // דוגמה: גוון קצת יותר בהיר מהרקע
-          
-          // level1 = רכיבים משניים (כמו inputs לפעמים)
-          level1: '#0f3460',
+          body: '#212121',
+          surface: '#3d3d3d', 
+
         },
-        // אפשר גם לשנות את צבע הטקסט אם רוצים
-        // text: {
-        //   primary: '#f3f3f3', //'#e94560', דוגמה: טקסט ורדרד (רק להדגמה)
-        //   // עדיף להשאיר את הדיפולט: #f3f3f3
-        // } 
+        text: {   
+          secondary: '#ffffff',  
+          icon: '#9394a5',  
+        },
       },
     },
-  },
+    light:{
+      palette: {
+        background: {
+          body: '	#ffffff',
+          surface: '#f1f1f2', 
+        },
+        text: {   
+          secondary: '#484b6a',  
+          icon: '#9394a5',  
+        },
+      },
+   },
+  }
 });
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
   <CssVarsProvider theme={customTheme}>
-      <CssBaseline />
-    <StrictMode>
-      <App />
-    </StrictMode>
+    <CssBaseline />
+      <StrictMode>
+        <App />
+      </StrictMode>
     </CssVarsProvider>
   </BrowserRouter>
 )
